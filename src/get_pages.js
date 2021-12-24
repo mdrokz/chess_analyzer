@@ -1,6 +1,6 @@
 (function () {
 
-    const element = document.getElementsByClassName('.archive-games-total')[0];
+    const element = document.getElementsByClassName('archive-games-total')[0];
 
     const total_matches = parseInt(element.innerText.split(':')[1].replace(',', ''));
 
