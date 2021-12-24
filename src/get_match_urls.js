@@ -1,7 +1,7 @@
 (function () {
 
     // get matches from the table
-    const ar = [...$('tbody').children]
+    const ar = [...document.getElementsByTagName('tbody')[0].children]
 
     // get all the url for matches that havent been analyzed
     const match_urls = ar
