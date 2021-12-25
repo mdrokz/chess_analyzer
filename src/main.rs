@@ -11,12 +11,12 @@ const GET_PAGES_SCRIPT: &'static str = include_str!("get_pages.js");
 macro_rules! element {
     ($t: expr,$($v: literal),*) => {
         ($(
-            $t.find_element($v).expect(&format!("{} not found",$v)),
+            $t.find_element($v).expect(&format!("element for this selector {} was not found",$v)),
         )*)
     };
 
     ($t: expr,$v: literal) => {
-        $t.find_element($v).expect(&format!("{} not found",$v))
+        $t.find_element($v).expect(&format!("element for this selector {} was not found",$v))
     };
 }
 
