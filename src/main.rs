@@ -2,6 +2,8 @@ use headless_chrome::{Browser, LaunchOptions};
 
 use std::time::Duration;
 
+use std::thread;
+
 const GET_MATCH_URLS_SCRIPT: &'static str = include_str!("get_match_urls.js");
 
 const GET_PAGES_SCRIPT: &'static str = include_str!("get_pages.js");
@@ -63,7 +65,7 @@ fn main() {
     p.type_into(&password).unwrap();
     l.click().unwrap();
 
-    std::thread::sleep(std::time::Duration::from_secs(3));
+    thread::sleep(Duration::from_secs(3));
 
     tab.navigate_to(&url).unwrap();
 
