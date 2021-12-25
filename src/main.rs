@@ -77,8 +77,6 @@ fn main() {
         .as_i64()
         .unwrap();
 
-    println!("{:?}", pages);
-
     let urls_object = tab.evaluate(GET_MATCH_URLS_SCRIPT, false).unwrap();
 
     let match_urls = collect_strings!(urls_object);
