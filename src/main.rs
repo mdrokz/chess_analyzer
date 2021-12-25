@@ -116,6 +116,9 @@ fn main() {
             tabs.push(new_tab);
         }
 
+        /* wait for analysis */
+        thread::sleep(Duration::from_secs_f64(2.5));
+
         for t in tabs {
             t.close(false).unwrap();
         }
