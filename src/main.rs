@@ -45,6 +45,18 @@ fn main() {
     // get password for login from program arguments
     let password = args.next().expect("password is empty");
 
+    let tab_cooldown = args
+        .next()
+        .expect("specify cooldown for opening new tabs")
+        .parse::<u64>()
+        .expect("specify a valid number");
+
+    let nav_cooldown = args
+        .next()
+        .expect("specify cooldown for going to next page")
+        .parse::<u64>()
+        .expect("specify a valid number");
+
     // format url with the profile name
     let url = format!("https://www.chess.com/games/archive/{}?gameOwner=other_game&gameTypes%5B0%5D=chess960&gameTypes%5B1%5D=daily&gameType=live",profile_name);
 
@@ -106,18 +118,24 @@ fn main() {
 
         let mut tabs = vec![];
 
-        for url in match_urls {
-            let new_tab = browser.new_tab().unwrap();
+        for (i, url) in match_urls.iter().enumerate() {
+            if i == 20 {
+                thread::sleep(Duration::from_secs(tab_cooldown));
+            } else {
+                let new_tab = browser.new_tab().unwrap();
 
-            new_tab.navigate_to(&url).unwrap();
+                new_tab.navigate_to(&url).unwrap();
 
-            new_tab.wait_until_navigated().expect("failed to navigate");
+                new_tab.wait_until_navigated().expect("failed to navigate");
 
-            tabs.push(new_tab);
+                tabs.push(new_tab);
+            }
         }
 
         /* wait for analysis */
-        thread::sleep(Duration::from_secs_f64(2.5));
+        if !match_urls.is_empty() {
+            thread::sleep(Duration::from_secs(nav_cooldown));
+        } 
 
         for t in tabs {
             t.close(false).unwrap();
