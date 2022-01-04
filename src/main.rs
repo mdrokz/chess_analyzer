@@ -47,15 +47,13 @@ fn main() {
 
     let tab_cooldown = args
         .next()
-        .expect("specify cooldown for opening new tabs")
-        .parse::<u64>()
-        .expect("specify a valid number");
+        .map_or(180, |v| v.parse::<u64>().expect("specify a valid number"));
 
     let nav_cooldown = args
         .next()
-        .expect("specify cooldown for going to next page")
-        .parse::<u64>()
-        .expect("specify a valid number");
+        .map_or(120, |v| v.parse::<u64>().expect("specify a valid number"));
+
+    println!("{}", tab_cooldown);
 
     // format url with the profile name
     let url = format!("https://www.chess.com/games/archive/{}?gameOwner=other_game&gameTypes%5B0%5D=chess960&gameTypes%5B1%5D=daily&gameType=live",profile_name);
@@ -135,7 +133,7 @@ fn main() {
         /* wait for analysis */
         if !match_urls.is_empty() {
             thread::sleep(Duration::from_secs(nav_cooldown));
-        } 
+        }
 
         for t in tabs {
             t.close(false).unwrap();
