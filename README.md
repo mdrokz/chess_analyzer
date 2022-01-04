@@ -5,8 +5,8 @@ This program goes to match archives of a chess.com user and opens all the matche
 
 # Usage - 
 
-1. you need to have a chess account with gold or diamond membership
+1. you need to have a chess.com account with gold or diamond membership
 2. there are 5 arguments (`username`,`password`,`target_user`,`tab_cooldown`,`page_cooldown`)
-3. pass number to `tab_cooldown` for waiting after opening 20 tabs, this prevents rate limiting. 
-4. pass number to `page_cooldown` for waiting after opening every page in the table, this prevents rate limiting.
+3. pass number to `tab_cooldown` for waiting after opening 20 tabs, this prevents rate limiting. (value defaults to 180) 
+4. pass number to `page_cooldown` for waiting after opening every page in the table, this prevents rate limiting. (value defaults to 120)
 5. pass args like this `cargo run -- username password target_user tab_cooldown page_cooldown`
